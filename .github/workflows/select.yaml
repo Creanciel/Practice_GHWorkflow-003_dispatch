@@ -1,0 +1,20 @@
+name: Trigger PUSH
+run-name: Trigger PUSH
+on:
+  workflow_dispatch:
+    inputs:
+      deploy-target:
+        description: "Deploy to ..."
+        required: true
+        type: choice
+        options:
+          - staging_foo
+          - staging_bar
+          - staging_hoge
+          - staging_piyo
+jobs:
+  dispatch-input:
+    name: Dispatch Input
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "You selected \"${{ inputs.deploy-target }}\""
