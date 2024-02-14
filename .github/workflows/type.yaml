@@ -1,0 +1,35 @@
+name: '[CD] INPUT'
+run-name: INPUT
+on:
+  workflow_dispatch:
+    inputs:
+      string:
+        description: string
+        type: string
+        required: true
+      number:
+        description: number
+        type: number
+        required: true
+      boolean:
+        description: boolean
+        type: boolean
+        required: true
+      choice:
+        description: "choice"
+        required: true
+        type: choice
+        options:
+          - choice-1
+          - choice-2
+          - choice-3
+          - choice-4
+jobs:
+  dispatch-input:
+    name: Dispatch Input
+    runs-on: ubuntu-22.04
+    steps:
+      - run: "echo \"string : ${{ inputs.string }}\""
+      - run: "echo \"number : ${{ inputs.number }}\""
+      - run: "echo \"boolean : ${{ inputs.boolean }}\""
+      - run: "echo \"choice : ${{ inputs.choice }}\""
