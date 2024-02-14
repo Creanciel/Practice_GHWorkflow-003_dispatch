@@ -1,4 +1,4 @@
-name: Trigger PUSH
+name: '[CD]'
 run-name: Trigger PUSH
 on:
   workflow_dispatch:
@@ -21,3 +21,11 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: echo "You selected \"${{ inputs.deploy-target }}\""
+
+  wait-for-deploy:
+    name: hoge
+    runs-on: ubuntu-22.04
+    environment:
+      name: Production
+    steps:
+      - run: echo "Hello!"
