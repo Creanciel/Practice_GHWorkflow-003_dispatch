@@ -3,9 +3,6 @@ run-name: Trigger PUSH
 on:
   workflow_dispatch:
     inputs:
-      tag:
-        description: 'Tag to trigger the workflow'
-        required: true
       deploy-target:
         description: "Deploy to ..."
         required: true
@@ -29,3 +26,14 @@ jobs:
       name: Production
     steps:
       - run: echo "Hello!"
+
+  empty-env:
+    name: empty-env
+    runs-on: ubuntu-22.04
+    environment:
+      name: trigger
+    steps:
+      - run: echo "Do empty-env"
+    needs:
+      - wait-for-deploy
+      - dispatch-input
