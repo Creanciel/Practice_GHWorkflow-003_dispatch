@@ -1,5 +1,5 @@
-name: '[CD]'
-run-name: Trigger PUSH
+name: '[CD] Deploy Chain'
+run-name: Deploy Chain
 on:
   workflow_dispatch:
     inputs:
