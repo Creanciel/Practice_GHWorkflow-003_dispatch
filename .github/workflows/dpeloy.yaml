@@ -1,0 +1,62 @@
+name: '[CD]'
+run-name: Trigger PUSH
+on:
+  workflow_dispatch:
+    inputs:
+      deploy-target:
+        description: "Deploy to ..."
+        required: true
+        type: choice
+        options:
+          - staging_foo
+          - staging_bar
+          - staging_hoge
+          - staging_piyo
+jobs:
+  build-front:
+    name: Build Front
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "You selected \"${{ inputs.deploy-target }}\""
+
+  build-backend:
+    name: Build Backend
+    runs-on: ubuntu-22.04
+    steps:
+      - run: echo "Hello!"
+
+  wait:
+    name: Wait
+    runs-on: ubuntu-22.04
+    needs:
+      - build-front
+      - build-backend
+    environment:
+      name: Production
+
+  migration:
+    name: Migration
+    runs-on: ubuntu-22.04
+    environment:
+      name: Production
+    needs: wait
+    steps:
+      - run: echo "Migration"
+
+  deploy-front:
+    name: Deploy Frontend
+    runs-on: ubuntu-22.04
+    environment:
+      name: Production
+    needs: wait
+    steps:
+      - run: echo "Deploy Frontend"
+
+  deploy-backend:
+    name: Deploy Backend
+    runs-on: ubuntu-22.04
+    environment:
+      name: Production
+    needs: wait
+    steps:
+      - run: echo "Deploy Backend"
