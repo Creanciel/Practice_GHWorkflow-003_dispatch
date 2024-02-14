@@ -3,6 +3,9 @@ run-name: Trigger PUSH
 on:
   workflow_dispatch:
     inputs:
+      tag:
+        description: 'Tag to trigger the workflow'
+        required: true
       deploy-target:
         description: "Deploy to ..."
         required: true
