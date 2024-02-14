@@ -33,6 +33,8 @@ jobs:
       - build-backend
     environment:
       name: Production
+    steps:
+      - run: echo "Ready for deploy"
 
   migration:
     name: Migration
